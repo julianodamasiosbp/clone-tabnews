@@ -1,0 +1,59 @@
+### Curso.dev
+
+Ambiente de desenvolvimento 
+	- Escrever
+	- Executar (terminal)
+	
+codespaces - GitHub
+
+## Dia 03
+
+next.js
+https://nextjs.org/
+
+"Se você deseja criar uma torta de maça do zero, você primeiro precisa criar um universo", Carl Sagan
+
+nvm ls -> Lista as versões do NVM
+
+nvm alias default -> Determina a versão default do node no terminal
+
+.nvmrc -> Arquivo de run commands, determina a versão do Node utilizado no projeto
+
+Analysis paralysis (Paralisia por Análise) - Paralisia por analisar ou pensar demais
+
+npm init -> Inicializa um projeto, adiciona o package.json no projeto
+
+npm install next@13.1.6
+npm install react@18.2.0
+npm install react-dom@18.2.0
+
+## Dia 04
+
+Servidor Web
+Servidor HTTP
+
+Protocolos
+	- HTTP
+	- SMTP
+	- FTP - File Transfer Protocol
+	- TCP - Transmission Control Protocol
+	- UDP - User Datagram Protocol
+	- IP - Internet Protocol
+
+Para executar o Next, é preciso adicionar o script no package.json:
+  "scripts": {
+    "dev": "next dev"
+  }
+  
+Atalho VScode
+ctrl + L -> Limpa o terminal
+
+File-Based Routing
+
+npm run dev -> Roda o projeto
+
+// Fazer o desafio do dia 04
+
+Versionamento de versões
+2000 - SVN (Centralizado)
+2005 - GIT (Distribuido)
