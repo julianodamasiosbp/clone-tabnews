@@ -24,5 +24,7 @@ licença utiliza no projeto: MIT
 ### Instalando dependências com as versões utilizadas no projeto
 
 *npm install next@13.1.6* - Instalando o NextJS
+
 *npm install react@18.2.0* - Instalando o React
+
 *npm install react-dom@18.2.0* - Instalando o React DOM
