@@ -1,5 +1,15 @@
 function Home() {
-    return <h1>Bem-vindo ao clone do TabNews</h1>
+    return <html>
+    <head>
+      <title>Title of the document</title>
+    </head>
+    
+    <body>
+      <h1>This is a heading</h1>
+      <p>This is a paragraph.</p>
+    </body>
+    
+    </html>
 }
 
 export default Home;
