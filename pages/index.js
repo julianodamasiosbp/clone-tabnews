@@ -1,12 +1,20 @@
 function Home() {
     return <html>
     <head>
-      <title>Title of the document</title>
+    <script>
+        let contador = 0;
+        add(){
+            this.contador += 1
+        }
+        document.getElementById("contador").innerHTML = contador;
+    </script>
+    <title>Contador</title>
     </head>
     
     <body>
-      <h1>This is a heading</h1>
-      <p>This is a paragraph.</p>
+      <p>Botão para acionar o contador:</p>
+      <button type="button" onclick="add()">+</button>
+      <p id="contador"></p>
     </body>
     
     </html>
