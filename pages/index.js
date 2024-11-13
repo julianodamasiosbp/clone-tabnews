@@ -1,21 +1,21 @@
 import { useState } from 'react';
 
 function Home() {
-    const [contador, setContador] = useState(0);
+    const [mensagem, setMensagem] = useState('');
 
-    function add() {
-        setContador(contador + 1);
+    function revelarMensagem() {
+        setMensagem('Eu te amo! 😍');
     }
     return (
         <div>
             <head>
-                <title>Contador</title>
+                <title>Mensagem Misteriosa</title>
             </head>
             
             <body>
-                <p>Botão que aciona o contador:</p>
-                <button type="button" onClick={add}>+</button>
-                <p id="contador">{contador}</p>
+                <p>Ellen, clique no botão para revelar uma mensagem:</p>
+                <button type="button" onClick={revelarMensagem}>Mostrar!</button>
+                <p>{mensagem}</p>
             </body>
         </div>
     );
