@@ -4,7 +4,7 @@ function Home() {
   const [mensagem, setMensagem] = useState("");
 
   function revelarMensagem() {
-    setMensagem("Eu te amo! 😍");
+    setMensagem("Eu te amo!!! 😍");
   }
   return (
     <div>
