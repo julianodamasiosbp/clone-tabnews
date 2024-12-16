@@ -4,7 +4,7 @@ test("GET to /api/v1/status should return 200", async () => {
   const postgresVersion = ambiente === "dev" ? "16.0" : "16.6";
   const maxConnections = ambiente === "dev" ? 100 : 112;
 
-  const response = await fetch("http://localhost:3000/api/v1/status");
+  const response = await fetch("http://localhost:3000/api/v1/status/status");
   expect(response.status).toBe(200);
 
   const responseBody = await response.json();
