@@ -35,9 +35,8 @@ async function getSQLConnectionUsed() {
   const databaseName = process.env.POSTGRES_DB;
   const queryResult = await database.query({
     text: "SELECT count(*)::int FROM pg_stat_activity WHERE datname = $1",
-    values: [databaseName]
+    values: [databaseName],
   });
-  console.log(queryResult.rows)
   return queryResult.rows[0].count;
 }
 

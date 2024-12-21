@@ -1,5 +1,4 @@
 test("GET to /api/v1/status should return 200", async () => {
-  console.log("NODE_ENV: ", process.env.NODE_ENV);
   const ambiente = process.env.NODE_ENV === "production" ? "prod" : "dev";
   const postgresVersion = ambiente === "dev" ? "16.0" : "16.6";
   const maxConnections = ambiente === "dev" ? 100 : 112;
@@ -8,7 +7,6 @@ test("GET to /api/v1/status should return 200", async () => {
   expect(response.status).toBe(200);
 
   const responseBody = await response.json();
-  console.log(responseBody);
   const parsedUpdatedAt = new Date(responseBody.updated_at).toISOString();
 
   expect(responseBody.updated_at).toEqual(parsedUpdatedAt);
