@@ -1,3 +1,9 @@
+import orchestrator from "test/orchestrator.js";
+
+beforeAll(async () => {
+  await orchestrator.waitForAllServices();
+});
+
 test("GET to /api/v1/status should return 200", async () => {
   const ambiente = process.env.NODE_ENV === "production" ? "prod" : "dev";
   const postgresVersion = ambiente === "dev" ? "16.0" : "16.6";
