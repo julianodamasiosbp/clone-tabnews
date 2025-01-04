@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Head from "next/head";
 
 function Home() {
   const [mensagem, setMensagem] = useState("");
@@ -8,9 +9,9 @@ function Home() {
   }
   return (
     <div>
-      <head>
+      <Head>
         <title>Mensagem Misteriosa</title>
-      </head>
+      </Head>
 
       <body>
         <p>Ellen, clique no botão para revelar uma mensagem:</p>
