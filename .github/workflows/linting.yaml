@@ -30,8 +30,8 @@ jobs:
       - run: npm ci
 
       - run: npm run lint:eslint:check
-  
-    commitlint:
+
+  commitlint:
     name: Commitlint
     runs-on: ubuntu-latest
     steps:
