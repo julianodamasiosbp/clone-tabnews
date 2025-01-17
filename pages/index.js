@@ -8,19 +8,19 @@ function Home() {
     setMensagem("Eu te amo!!! 😍");
   }
   return (
-    <div>
+    <>
       <Head>
         <title>Mensagem Misteriosa</title>
       </Head>
 
-      <body>
+      <div>
         <p>Ellen, clique no botão para revelar uma mensagem:</p>
         <button type="button" onClick={revelarMensagem}>
           Mostrar!
         </button>
         <p>{mensagem}</p>
-      </body>
-    </div>
+      </div>
+    </>
   );
 }
 
