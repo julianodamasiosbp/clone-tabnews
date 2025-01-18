@@ -12,6 +12,7 @@ export default function StatusPage() {
     <>
       <h1>Status</h1>
       <UpdatedAt />
+      <DatabaseStatus />
     </>
   );
 }
@@ -21,26 +22,44 @@ function UpdatedAt() {
     refreshInterval: 2000,
   });
   let updatedAtText = "Carregando...";
-  let databaseVersion;
-  let databaseMaxConnection;
-  let databaseOpenedConnection;
 
   if (!isLoading && data) {
     updatedAtText = new Date(data.updated_at).toLocaleString("pt-BR");
-    databaseVersion = data.dependencies.database.version;
-    databaseMaxConnection = data.dependencies.database.max_connections;
-    databaseOpenedConnection = data.dependencies.database.opened_connections;
+  }
+
+  return (
+    <>
+      <div>Última atualização: {updatedAtText}</div>
+    </>
+  );
+}
+
+function DatabaseStatus() {
+  const { isLoading, data } = useSWR("/api/v1/status", fetchAPI, {
+    refreshInterval: 2000,
+  });
+  let databaseStatusInformation = "Carregando...";
+
+  if (!isLoading && data) {
+    databaseStatusInformation = (
+      <>
+        <div>Versão: {data.dependencies.database.version}</div>
+        <div>
+          Conexões abertas: {data.dependencies.database.opened_connections}
+        </div>
+        <div>
+          Conexões máximas: {data.dependencies.database.max_connections}
+        </div>
+      </>
+    );
   }
 
   return (
     <>
       <div>
-        <h3>Database:</h3>
-        <p>Versão: {databaseVersion}</p>
-        <p>Conexões Máxima: {databaseMaxConnection}</p>
-        <p>Conexões Abertas: {databaseOpenedConnection}</p>
+        <h2>Database:</h2>
+        <div>{databaseStatusInformation}</div>
       </div>
-      <h4>Última atualização: {updatedAtText}</h4>
     </>
   );
 }
