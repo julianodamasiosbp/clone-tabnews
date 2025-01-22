@@ -1,28 +1,43 @@
+import { createRouter } from "next-connect";
 import database from "infra/database.js";
-import { InternalServerError } from "infra/errors";
+import { InternalServerError, MethodNotAllowedError } from "infra/errors";
 
-async function status(request, response) {
-  try {
-    const updatedAt = new Date().toISOString();
-    const versionDatabase = await getSQLVersion();
-    const maxDatabaseConnections = await getSQLMaxConnection();
-    const openedDatabaseConnections = await getSQLConnectionUsed();
-    response.status(200).json({
-      updated_at: updatedAt,
-      dependencies: {
-        database: {
-          version: versionDatabase,
-          max_connections: maxDatabaseConnections,
-          opened_connections: openedDatabaseConnections,
-        },
+const router = createRouter();
+
+router.get(getHandler);
+
+export default router.handler({
+  onNoMatch: onNoMatchHandler,
+  onError: onErrorHandler,
+});
+
+function onNoMatchHandler(request, response) {
+  const publicErrorObject = new MethodNotAllowedError();
+  response.status(publicErrorObject.statusCode).json(publicErrorObject);
+}
+
+function onErrorHandler(error, request, response) {
+  const publicErrorObject = new InternalServerError({
+    cause: error,
+  });
+  response.status(500).json(publicErrorObject);
+}
+
+async function getHandler(request, response) {
+  const updatedAt = new Date().toISOString();
+  const versionDatabase = await getSQLVersion();
+  const maxDatabaseConnections = await getSQLMaxConnection();
+  const openedDatabaseConnections = await getSQLConnectionUsed();
+  response.status(200).json({
+    updated_at: updatedAt,
+    dependencies: {
+      database: {
+        version: versionDatabase,
+        max_connections: maxDatabaseConnections,
+        opened_connections: openedDatabaseConnections,
       },
-    });
-  } catch (error) {
-    const publicErrorObject = new InternalServerError({
-      cause: error,
-    });
-    response.status(500).json(publicErrorObject);
-  }
+    },
+  });
 }
 
 async function getSQLVersion() {
@@ -47,5 +62,3 @@ async function getSQLConnectionUsed() {
   });
   return queryResult.rows[0].count;
 }
-
-export default status;
