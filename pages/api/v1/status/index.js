@@ -1,28 +1,31 @@
+import { createRouter } from "next-connect";
 import database from "infra/database.js";
-import { InternalServerError } from "infra/errors";
+import controller from "infra/controller.js";
 
-async function status(request, response) {
-  try {
-    const updatedAt = new Date().toISOString();
-    const versionDatabase = await getSQLVersion();
-    const maxDatabaseConnections = await getSQLMaxConnection();
-    const openedDatabaseConnections = await getSQLConnectionUsed();
-    response.status(200).json({
-      updated_at: updatedAt,
-      dependencies: {
-        database: {
-          version: versionDatabase,
-          max_connections: maxDatabaseConnections,
-          opened_connections: openedDatabaseConnections,
-        },
+const router = createRouter();
+
+router.get(getHandler);
+
+export default router.handler({
+  onNoMatch: controller.onNoMatchHandler,
+  onError: controller.onErrorHandler,
+});
+
+async function getHandler(request, response) {
+  const updatedAt = new Date().toISOString();
+  const versionDatabase = await getSQLVersion();
+  const maxDatabaseConnections = await getSQLMaxConnection();
+  const openedDatabaseConnections = await getSQLConnectionUsed();
+  response.status(200).json({
+    updated_at: updatedAt,
+    dependencies: {
+      database: {
+        version: versionDatabase,
+        max_connections: maxDatabaseConnections,
+        opened_connections: openedDatabaseConnections,
       },
-    });
-  } catch (error) {
-    const publicErrorObject = new InternalServerError({
-      cause: error,
-    });
-    response.status(500).json(publicErrorObject);
-  }
+    },
+  });
 }
 
 async function getSQLVersion() {
@@ -47,5 +50,3 @@ async function getSQLConnectionUsed() {
   });
   return queryResult.rows[0].count;
 }
-
-export default status;
