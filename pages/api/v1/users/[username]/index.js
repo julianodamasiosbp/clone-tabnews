@@ -7,7 +7,6 @@ const router = createRouter();
 router.get(getHandler);
 router.patch(patchHandler);
 
-
 export default router.handler({
   onNoMatch: controller.onNoMatchHandler,
   onError: controller.onErrorHandler,
