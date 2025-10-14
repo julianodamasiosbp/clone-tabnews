@@ -22,9 +22,7 @@ async function findOneByUsername(username) {
           ;`,
       values: [username],
     });
-
     if (results.rowCount === 0) {
-      console.log("RESULTS ROW COUNT: ", results.rowCount);
       throw new NotFoundError({
         message: "O username informado não foi encontrado no sistema.",
         action: "Verifique se o username está digitado corretamente.",
@@ -97,7 +95,6 @@ async function update(username, userInputValues) {
         userWithNewValues.password,
       ],
     });
-
     return results.rows[0];
   }
   return updatedUser;
