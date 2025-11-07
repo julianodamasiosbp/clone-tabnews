@@ -164,8 +164,6 @@ describe("PATCH /api/v1/users/[username]", () => {
         password: "newPassword1",
       });
 
-      user.runSelectAllQuery();
-
       const response = await fetch(
         `http://localhost:3000/api/v1/users/${createdUser.username}`,
         {
