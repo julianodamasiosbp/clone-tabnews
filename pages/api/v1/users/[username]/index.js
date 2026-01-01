@@ -7,10 +7,7 @@ const router = createRouter();
 router.get(getHandler);
 router.patch(patchHandler);
 
-export default router.handler({
-  onNoMatch: controller.onNoMatchHandler,
-  onError: controller.onErrorHandler,
-});
+export default router.handler(controller.errorHandlers);
 
 async function getHandler(request, response) {
   const username = request.query.username;
@@ -20,6 +17,7 @@ async function getHandler(request, response) {
 }
 
 async function patchHandler(request, response) {
+
   const username = request.query.username;
   const userInputValues = request.body;
 
