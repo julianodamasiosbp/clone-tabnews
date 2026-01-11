@@ -17,7 +17,6 @@ async function getHandler(request, response) {
 }
 
 async function patchHandler(request, response) {
-
   const username = request.query.username;
   const userInputValues = request.body;
 
