@@ -5,7 +5,7 @@ import migrator from "models/migrator.js";
 import user from "models/user.js";
 import session from "models/session.js";
 
-const emailHttpUrl = `http://${process.env.EMAIL_HTTP_HOST}:${process.env.EMAIL_HTTP_PORT}`
+const emailHttpUrl = `http://${process.env.EMAIL_HTTP_HOST}:${process.env.EMAIL_HTTP_PORT}`;
 
 async function waitForAllServices() {
   await waitForWebService();
@@ -70,20 +70,22 @@ async function createSession(userId) {
 
 async function deleteAllEmails() {
   await fetch(`${emailHttpUrl}/messages`, {
-    method: "DELETE"
+    method: "DELETE",
   });
 }
 
 async function getLastEmail() {
   const emailListResponse = await fetch(`${emailHttpUrl}/messages`, {
-    method: "GET"
+    method: "GET",
   });
 
   const emailListBody = await emailListResponse.json();
 
   const lastEmailItem = emailListBody.pop();
 
-  const emailTextResponse = await fetch(`${emailHttpUrl}/messages/${lastEmailItem.id}.plain`);
+  const emailTextResponse = await fetch(
+    `${emailHttpUrl}/messages/${lastEmailItem.id}.plain`,
+  );
   const emailTextBody = await emailTextResponse.text();
 
   lastEmailItem.text = emailTextBody;
